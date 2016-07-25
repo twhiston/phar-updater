@@ -20,6 +20,7 @@ use Humbug\SelfUpdate\Exception\NoSignatureException;
 use Humbug\SelfUpdate\Strategy\StrategyInterface;
 use Humbug\SelfUpdate\Strategy\ShaStrategy;
 use Humbug\SelfUpdate\Strategy\GithubStrategy;
+use Humbug\SelfUpdate\Strategy\BitbucketStrategy;
 
 class Updater
 {
@@ -27,6 +28,8 @@ class Updater
     const STRATEGY_SHA1 = 'sha1';
 
     const STRATEGY_GITHUB = 'github';
+
+    const STRATEGY_BITBUCKET = 'bitbucket';
 
     /**
      * @var StrategyInterface
@@ -163,7 +166,9 @@ class Updater
             case self::STRATEGY_GITHUB:
                 $this->strategy = new GithubStrategy;
                 break;
-
+            case self::STRATEGY_BITBUCKET:
+                $this->strategy = new BitbucketStrategy;
+                break;
             default:
                 $this->strategy = new ShaStrategy;
                 break;
